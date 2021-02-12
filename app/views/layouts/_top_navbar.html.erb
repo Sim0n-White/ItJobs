@@ -1,0 +1,15 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand">ItJobs</a>
+  <form class="form-inline ml-auto">
+    <% if user_signed_in? %>
+      <%= link_to 'Выйти из аккаунта', destroy_user_session_path, method: :delete, class: "btn btn-outline-danger my-2 my-sm-0" %>
+    <% else %>
+      <li class="nav-item" style="padding-right: 5px">
+        <%= link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-outline-success my-sm-0" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to 'Войти', new_user_session_path, class: "btn btn-outline-success my-5 my-sm-0" %>
+      </li>
+    <% end %>
+  </form>
+</nav>
