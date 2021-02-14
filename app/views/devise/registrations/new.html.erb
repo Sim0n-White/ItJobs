@@ -1,29 +1,43 @@
-<h2>Sign up</h2>
+<div class="reg_container container", style="padding-top: 30px;">
+  <%= form_for(resource, as: resource_name, :html => { :id => "signup" }, url: registration_path(resource_name)) do |f| %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="header">
+      <h3>Регистрация</h3>
+      <p>в приложении ItJobs</p>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="sep"></div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="inputs">
+      <%= bootstrap_devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control' %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="form-group">
+        <%= f.label 'Пароль' %>
+        <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control' %>
+        <% if @minimum_password_length %>
+          <small class="form-text text-muted"> минимум 6 символов </small>
+        <% end %>
+      </div>
 
-<%= render "devise/shared/links" %>
+      <div class="form-group">
+        <%= f.label 'Подтверждение пароля' %>
+        <%= f.password_field :password_confirmation, autocomplete: 'current-password', class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit 'Зарегистрироваться', class: 'btn btn-primary' %>
+      </div>
+
+    </div>
+
+    <%= render 'devise/shared/links' %>
+
+  <% end %>
+
+</div>
+
