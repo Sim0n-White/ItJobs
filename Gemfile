@@ -13,6 +13,7 @@ gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'activerecord-session_store'
 
+gem 'annotate'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise-bootstrap-views', '~> 1.0'
