@@ -3,7 +3,9 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  admin                  :boolean
 #  email                  :string           default(""), not null
+#  employer               :boolean
 #  encrypted_password     :string           default(""), not null
 #  git_home_page          :string
 #  private_repos          :integer
