@@ -3,8 +3,14 @@
     .col
       %h1
         = link_to 'Главная', root_path
+        = " > #{@employer_vacancy.company_name}"
+        = "(#{@employer_vacancy.position})"
+        = "#{@employer_vacancy.views_count}👀"
 
   .row
-    .col.mb-4.vacancy_details
+    .col
+      = "Вакансия предоставлена компанией #{link_to @employer_vacancy.company_name, @employer_vacancy.company_site}, "
+      = "создана #{time_ago_in_words(@employer_vacancy.created_at, locale: :ru)} назад"
+  .row
+    .col.mb-4
       = @employer_vacancy.body
-      = "Создано #{time_ago_in_words(@employer_vacancy.created_at, locale: :ru)} назад"

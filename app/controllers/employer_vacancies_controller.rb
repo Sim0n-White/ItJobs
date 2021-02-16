@@ -19,7 +19,9 @@ class EmployerVacanciesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @employer_vacancy.update(views_count: @employer_vacancy.views_count + 1)
+  end
 
   private
 
