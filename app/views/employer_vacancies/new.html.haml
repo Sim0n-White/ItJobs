@@ -1,0 +1,14 @@
+= simple_form_for @employer_vacancy, html: { class: 'main_container' } do |f|
+  = f.input :position, label: "Позиция", autofocus: true
+  = f.rich_text_area :body, label: :body
+  = f.input :company_name, label: "Компания", autofocus: true
+  = f.input :company_site, label: "Сайт компании", autofocus: true
+  = f.input :contact_email, label: "Контактная почта", autofocus: true
+  = f.input :contact_person, label: "Контактное лицо", autofocus: true
+  = f.input :fork_from, label: "От", autofocus: true
+  = f.input :fork_to, label: "До", autofocus: true
+
+
+  .form-group.form-actions
+    .col-sm-offset-3.col-sm-9
+      = f.button :submit, 'Сохранить', class: 'btn btn-primary'
