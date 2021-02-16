@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_133831) do
+ActiveRecord::Schema.define(version: 2021_02_16_090019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,27 @@ ActiveRecord::Schema.define(version: 2021_02_15_133831) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "employee_vacancies", force: :cascade do |t|
+    t.string "position"
+    t.integer "schedule_id"
+    t.integer "country_id"
+    t.integer "city_id"
+    t.integer "fork_from"
+    t.integer "fork_to"
+    t.integer "currency_id"
+    t.integer "work_experience"
+    t.integer "payment_period_id"
+    t.string "education"
+    t.string "hobbies"
+    t.string "contact_email"
+    t.string "contact_person"
+    t.string "company_name"
+    t.string "company_site"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "views_count", default: 0
+  end
+
   create_table "employer_vacancies", force: :cascade do |t|
     t.string "position"
     t.integer "schedule_id"
@@ -68,6 +89,7 @@ ActiveRecord::Schema.define(version: 2021_02_15_133831) do
     t.string "company_site"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "views_count", default: 0
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -92,7 +114,7 @@ ActiveRecord::Schema.define(version: 2021_02_15_133831) do
     t.string "git_home_page"
     t.integer "public_repos"
     t.integer "private_repos"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.boolean "employer"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

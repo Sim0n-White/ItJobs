@@ -10,6 +10,7 @@
 #  fork_from         :integer
 #  fork_to           :integer
 #  position          :string
+#  views_count       :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  city_id           :integer

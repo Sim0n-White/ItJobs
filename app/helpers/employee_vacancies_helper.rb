@@ -1,0 +1,2 @@
+module EmployeeVacanciesHelper
+end

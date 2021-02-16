@@ -1,0 +1,10 @@
+.container
+  .row.mt-4
+    .col
+      %h1
+        = link_to 'Главная', root_path
+
+  .row
+    .col.mb-4.vacancy_details
+      = @employer_vacancy.body
+      = "Создано #{time_ago_in_words(@employer_vacancy.created_at, locale: :ru)} назад"

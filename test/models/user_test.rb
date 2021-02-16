@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  admin                  :boolean
+#  admin                  :boolean          default(FALSE)
 #  email                  :string           default(""), not null
 #  employer               :boolean
 #  encrypted_password     :string           default(""), not null
