@@ -4,10 +4,7 @@
       %h1 Вакансии для разработчиков
     .col-sm-5
       .d-flex.justify-content-lg-end
-        - if current_user.employer || current_user.admin
-          = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-primary'
-        - if !current_user.employer || current_user.admin
-          sdfsdfsdf
+        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-primary' if policy(:employer_vacancy).new?
   .ul.list-group
     - @vacancies.each do |vacancy|
       .li.list-group-item

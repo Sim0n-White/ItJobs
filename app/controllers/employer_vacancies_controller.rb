@@ -7,11 +7,16 @@ class EmployerVacanciesController < ApplicationController
   end
 
   def new
+    authorize EmployerVacancy
+
     @employer_vacancy = EmployerVacancy.new
   end
 
   def create
-    @employer_vacancy = EmployerVacancy.new vacancy_params
+    authorize EmployerVacancy
+
+    @employer_vacancy = EmployerVacancy.new(vacancy_params)
+    @employer_vacancy.user_id = current_user.id
     if @employer_vacancy.save
       redirect_to root_path, notice: 'Ваканстя успешно создана!'
     else
@@ -22,6 +27,8 @@ class EmployerVacanciesController < ApplicationController
   def show
     @employer_vacancy.update(views_count: @employer_vacancy.views_count + 1)
   end
+
+
 
   private
 
