@@ -1,6 +1,7 @@
 class EmployerVacanciesController < ApplicationController
   before_action :authenticate_user!
   before_action :load_model, only: %i[show]
+  before_action :load_collections, only: %i[new create]
 
   def index
     @vacancies = EmployerVacancy.all
@@ -41,13 +42,21 @@ class EmployerVacanciesController < ApplicationController
       :fork_from,
       :fork_to,
       :position,
-      :body
-      #:city_id,
-      #:country_id,
-      #:currency_id,
-      #:payment_period_id,
-      #:schedule_id
+      :body,
+      :city_id,
+      :country_id,
+      :currency_id,
+      :payment_period_id,
+      :schedule_id
     )
+  end
+
+  def load_collections
+    @schedules = Schedule.all
+    @cities = City.all.order(:city_name)
+    @countries = Country.all.order(:country_name)
+    @currencies = Currency.all.order(:currency_name)
+    @period = PaymentPeriod.all.order(:payment_period_name)
   end
 
   def load_model

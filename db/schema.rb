@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_152645) do
+ActiveRecord::Schema.define(version: 2021_02_17_135227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,25 @@ ActiveRecord::Schema.define(version: 2021_02_16_152645) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "city_name"
+    t.integer "country_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "country_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "currency_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "employee_vacancies", force: :cascade do |t|
     t.string "position"
     t.integer "schedule_id"
@@ -92,6 +111,18 @@ ActiveRecord::Schema.define(version: 2021_02_16_152645) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "views_count", default: 0
     t.integer "user_id"
+  end
+
+  create_table "payment_periods", force: :cascade do |t|
+    t.string "payment_period_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "schedule_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "sessions", force: :cascade do |t|

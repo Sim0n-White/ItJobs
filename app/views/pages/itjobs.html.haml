@@ -11,7 +11,7 @@
         .row
           .col-sm-8
             %h4
-              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id)
+              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id) if policy(vacancy).show?
           .col-sm-4
             = vacancy.company_site
         .row
