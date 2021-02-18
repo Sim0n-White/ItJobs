@@ -1,0 +1,23 @@
+.container
+  .row.mt-4.mb-4.align-items-center.align-items-lg-baseline
+    .col-sm-7
+      %h1 Ваши вакансии
+  .ul.list-group
+    - @vacancies.each do |vacancy|
+      .li.list-group-item
+        .row
+          .col-sm-8
+            %h4
+              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id) if policy(vacancy).show?
+          .col-sm-4
+            = vacancy.company_site
+        .row
+          .col-sm-8
+            = vacancy.contact_email
+          .col-sm-4
+            = vacancy.contact_person
+            = vacancy.position
+        = vacancy.contact_person
+  .row.mt-3
+    .col
+      = pagy_bootstrap_nav(@pagy).html_safe

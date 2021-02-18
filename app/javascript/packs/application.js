@@ -8,13 +8,9 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import $ from 'jquery';
-import 'select2';                       // globally assign select2 fn to $ element
-import 'select2/dist/css/select2.css';  // optional if you have css loader
-
-$(() => {
-    $('.select2-fullwidth').select2();
-});
+import $ from 'jquery'
+import 'select2'
+import 'select2/dist/css/select2.css'
 
 
 Rails.start()
@@ -23,3 +19,7 @@ ActiveStorage.start()
 
 require("trix")
 require("@rails/actiontext")
+
+$( document ).on('turbolinks:load', function() {
+    $('.select2-fullwidth').select2({theme: "bootstrap", width: '100%'});
+})
