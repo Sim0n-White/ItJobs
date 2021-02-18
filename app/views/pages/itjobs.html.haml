@@ -4,14 +4,14 @@
       %h1 Вакансии для разработчиков
     .col-sm-5
       .d-flex.justify-content-lg-end
-        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-primary'
+        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-primary' if policy(:employer_vacancy).new?
   .ul.list-group
     - @vacancies.each do |vacancy|
       .li.list-group-item
         .row
           .col-sm-8
             %h4
-              = vacancy.company_name
+              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id) if policy(vacancy).show?
           .col-sm-4
             = vacancy.company_site
         .row
@@ -21,4 +21,6 @@
             = vacancy.contact_person
             = vacancy.position
         = vacancy.contact_person
-  = pagy_bootstrap_nav(@pagy).html_safe
+  .row.mt-3
+    .col
+      = pagy_bootstrap_nav(@pagy).html_safe

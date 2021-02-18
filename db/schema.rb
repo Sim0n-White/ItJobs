@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_133831) do
+ActiveRecord::Schema.define(version: 2021_02_18_090911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,25 @@ ActiveRecord::Schema.define(version: 2021_02_15_133831) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "city_name"
+    t.integer "country_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "countries", force: :cascade do |t|
+    t.string "country_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "currencies", force: :cascade do |t|
+    t.string "currency_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "employer_vacancies", force: :cascade do |t|
     t.string "position"
     t.integer "schedule_id"
@@ -66,6 +85,20 @@ ActiveRecord::Schema.define(version: 2021_02_15_133831) do
     t.string "contact_person"
     t.string "company_name"
     t.string "company_site"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "views_count", default: 0
+  end
+
+  create_table "payment_periods", force: :cascade do |t|
+    t.string "payment_period_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.string "schedule_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
