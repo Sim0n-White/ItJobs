@@ -69,34 +69,3 @@
 
         .form-group
           = f.button :submit, 'Сохранить', class: 'btn btn-primary'
-
-:javascript
-
-  $(document).ready(function() {
-    setTimeout(function() {
-      $("#employer_vacancy_country_id").change();
-    }, 100);
-  });
-
-  $("#employer_vacancy_country_id").change(function(){
-    console.log($(this).val());
-    $.ajax({
-       url: '/cities/load.json',
-       data: { country_id: $(this).val() },
-       global: false
-     }).done(function(response) { add_options('#employer_vacancy_city_id', response); });
-
-    setTimeout(function() {
-      $("#employer_vacancy_city_id").change();
-    }, 500);
-  });
-
-  function add_options(selector, options) {
-    let select = $(selector);
-    console.log(select.find('option'));
-    select.find('option').remove();
-    $.each(options['data'], function() {
-     console.log(this['city_name'], this['id']);
-      select.append( new Option(this['city_name'], this['id']) );
-    });
-  }

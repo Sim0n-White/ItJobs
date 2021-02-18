@@ -13,6 +13,13 @@ class EmployerVacanciesController < ApplicationController
     @employer_vacancy = EmployerVacancy.new
   end
 
+  def edit
+
+  end
+
+  def update
+
+  end
   def create
     authorize EmployerVacancy
 
