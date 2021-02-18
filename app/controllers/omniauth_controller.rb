@@ -1,4 +1,6 @@
 class OmniauthController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def github
     provider_data = request.env['omniauth.auth']
     @user = User.create_from_provider_data(provider_data)

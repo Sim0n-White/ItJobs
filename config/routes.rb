@@ -2,7 +2,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
   root 'pages#itjobs'
 
-  resources :employer_vacancies, except: %i[index]
+  resources :administrations
+  resources :employer_vacancies do
+    member do
+      post :accept
+      post :reject
+    end
+  end
 
   resources :cities do
     collection do

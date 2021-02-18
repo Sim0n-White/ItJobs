@@ -1,0 +1,73 @@
+.container
+  .row.mb-4.mt-4
+    .col
+      %h1
+        = link_to 'Главная', root_path
+        >
+        = link_to 'Ваши вакансии', employer_vacancies_path
+        > Изменить вакансию
+  .row
+    .col.mb-4
+      = simple_form_for @employer_vacancy do |f|
+        .form-group
+          .row
+            .col-8
+              .label *Позиция
+              = f.text_field :position, class: 'full-width', autofocus: true
+            .col-4
+              .label
+                *Тип занятости
+                = f.input :schedule_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @schedules,
+                     label_method: :schedule_name, value_method: :id, include_blank: false
+        .form-group
+          .label *Описание вакансии, детали и стек технологий
+          = f.rich_text_area :body, label: :body, class: "trix-editor form-control"
+        .form-group
+          .row
+            .col-6
+              .label *Компания
+              = f.text_field :company_name, class: 'full-width'
+            .col-6
+              .label *Сайт компании
+              = f.text_field :company_site, class: 'full-width'
+        .form-group
+          .row
+            .col-6
+              .label *Контактная почта
+              = f.text_field :contact_email, class: 'full-width'
+            .col-6
+              .label *Контактное лицо
+              = f.text_field :contact_person, class: 'full-width'
+        .form-group
+          .row
+            .col-3
+              .label *Зарплатная вилка
+            .col-3
+            .col-3
+              .label *Денежная единица
+            .col-3
+              .label *Период
+          .row
+            .col-3
+              = f.input :fork_from, placeholder: 'От', input_html: { style: "width: 100%;" }, class: 'full-width', label: false
+            .col-3
+              = f.input :fork_to, placeholder: 'До', input_html: { style: "width: 100%;" }, label: false
+            .col-3
+              = f.input :currency_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @currencies,
+                   label_method: :currency_name, value_method: :id, include_blank: false
+            .col-3
+              = f.input :payment_period_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @period,
+                   label_method: :payment_period_name, value_method: :id, include_blank: false
+        .form-group
+          .row
+            .col-3
+              .label *Страна
+              = f.input :country_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @countries,
+                   label_method: :country_name, value_method: :id, include_blank: false
+            .col-3
+              .label *Город
+              = f.input :city_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @cities,
+                   label_method: :city_name, value_method: :id, include_blank: false
+
+        .form-group
+          = f.button :submit, 'Сохранить', class: 'btn btn-primary'

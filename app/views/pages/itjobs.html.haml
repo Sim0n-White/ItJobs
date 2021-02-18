@@ -3,15 +3,17 @@
     .col-sm-7
       %h1 Вакансии для разработчиков
     .col-sm-5
-      .d-flex.justify-content-lg-end
-        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-primary' if policy(:employer_vacancy).new?
+      .justify-content-lg-end(style='right: 15px; position: absolute; bottom: -10px')
+        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-success' if policy(:employer_vacancy).new?
+        = link_to 'Ваши вакансии', employer_vacancies_path, class: 'btn btn-primary' if policy(:employer_vacancy).index?
+
   .ul.list-group
     - @vacancies.each do |vacancy|
       .li.list-group-item
         .row
           .col-sm-8
             %h4
-              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id) if policy(vacancy).show?
+              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id)
           .col-sm-4
             = vacancy.company_site
         .row

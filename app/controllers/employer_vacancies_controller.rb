@@ -1,10 +1,11 @@
 class EmployerVacanciesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :load_model, only: %i[show]
-  before_action :load_collections, only: %i[new create]
+  before_action :load_model, only: %i[show edit update accept reject]
+  before_action :load_collections, only: %i[new create edit update]
 
   def index
-    @vacancies = EmployerVacancy.all
+    authorize EmployerVacancy
+
+    @pagy, @vacancies = pagy(EmployerVacancy.where(user_id: current_user.id))
   end
 
   def new
@@ -14,12 +15,19 @@ class EmployerVacanciesController < ApplicationController
   end
 
   def edit
-
+    authorize @employer_vacancy
   end
 
   def update
+    authorize @employer_vacancy
 
+    if @employer_vacancy.update vacancy_params
+      redirect_to employer_vacancies_path, notice: 'Ваканстя успешно изменена!'
+    else
+      render :edit
+    end
   end
+
   def create
     authorize EmployerVacancy
 
@@ -33,7 +41,20 @@ class EmployerVacanciesController < ApplicationController
   end
 
   def show
+    authorize @employer_vacancy
     @employer_vacancy.update(views_count: @employer_vacancy.views_count + 1)
+  end
+
+  def accept
+    authorize @employer_vacancy
+    @employer_vacancy.update(status: true)
+    redirect_to administrations_path, notice: 'Вакансия принята!'
+  end
+
+  def reject
+    authorize @employer_vacancy
+    @employer_vacancy.update(status: false)
+    redirect_to administrations_path, notice: 'Вакансия отклонена!'
   end
 
   private
@@ -63,7 +84,6 @@ class EmployerVacanciesController < ApplicationController
     @currencies = Currency.all.order(:currency_name)
     @period = PaymentPeriod.all.order(:payment_period_name)
   end
-
 
   def load_model
     @employer_vacancy = EmployerVacancy.find params[:id]
