@@ -17,6 +17,8 @@ gem 'annotate'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise-bootstrap-views', '~> 1.0'
+gem 'pundit'
+gem 'select2-rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server

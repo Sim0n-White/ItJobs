@@ -10,6 +10,7 @@
 #  fork_from         :integer
 #  fork_to           :integer
 #  position          :string
+#  views_count       :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  city_id           :integer
@@ -17,6 +18,7 @@
 #  currency_id       :integer
 #  payment_period_id :integer
 #  schedule_id       :integer
+#  user_id           :integer
 #
 
 class EmployerVacancy < ActiveRecord::Base
