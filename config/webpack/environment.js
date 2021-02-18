@@ -8,7 +8,3 @@ environment.plugins.prepend('Provide',
     })
 )
 module.exports = environment
-
-externals: {
-    jquery: 'jQuery'
-}
