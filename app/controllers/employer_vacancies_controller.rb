@@ -1,5 +1,5 @@
 class EmployerVacanciesController < ApplicationController
-  before_action :load_model, only: %i[show edit update accept reject]
+  before_action :load_model, only: %i[show edit update accept reject destroy]
   before_action :load_collections, only: %i[new create edit update]
 
   def index
@@ -40,6 +40,13 @@ class EmployerVacanciesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize EmployerVacancy
+
+    @employer_vacancy.destroy
+    redirect_to employer_vacancies_path
+  end
+
   def show
     authorize @employer_vacancy
     @employer_vacancy.update(views_count: @employer_vacancy.views_count + 1)
@@ -73,7 +80,9 @@ class EmployerVacanciesController < ApplicationController
       :country_id,
       :currency_id,
       :payment_period_id,
-      :schedule_id
+      :schedule_id,
+      :code_language_id,
+      :remote_work
     )
   end
 
@@ -83,6 +92,7 @@ class EmployerVacanciesController < ApplicationController
     @countries = Country.all.order(:country_name)
     @currencies = Currency.all.order(:currency_name)
     @period = PaymentPeriod.all.order(:payment_period_name)
+    @code_languages = CodeLanguage.all.order(:code_language_name)
   end
 
   def load_model

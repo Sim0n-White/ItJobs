@@ -21,7 +21,7 @@
                      label_method: :schedule_name, value_method: :id, include_blank: false
         .form-group
           .label *Описание вакансии, детали и стек технологий
-          = f.rich_text_area :body, label: :body, class: "trix-editor form-control"
+          = f.rich_text_area :body, label: :body
         .form-group
           .row
             .col-6
@@ -68,6 +68,18 @@
               .label *Город
               = f.input :city_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @cities,
                    label_method: :city_name, value_method: :id, include_blank: false
+            .col-3
+              .label *Язык программирования
+              = f.input :code_language_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @code_languages,
+                   label_method: :code_language_name, value_method: :id, include_blank: false
+        .form-group
+          .row
+            .col-3
+              = f.input :remote_work, label: "Возможна удалённая работа", as: :boolean
 
         .form-group
-          = f.button :submit, 'Сохранить', class: 'btn btn-primary'
+          .row
+            .col-9
+              = f.button :submit, 'Сохранить', class: 'btn btn-primary'
+            .col-3
+              = link_to 'Удалить вакансию', employer_vacancy_path(@employer_vacancy), method: :delete, class: 'btn btn-danger float-right'

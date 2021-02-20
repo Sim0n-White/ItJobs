@@ -32,9 +32,9 @@ class EmployerVacancyPolicy < ::ApplicationPolicy
     admin? || (user&.employer? && user_is_owner?)
   end
 
-  #def destroy?
-    # admin? || !user.employer
-  #end
+  def destroy?
+    admin? || (user&.employer? && user_is_owner?)
+  end
 
   private
 

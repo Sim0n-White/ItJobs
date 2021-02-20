@@ -10,11 +10,13 @@
 #  fork_from         :integer
 #  fork_to           :integer
 #  position          :string
+#  remote_work       :boolean          default(FALSE)
 #  status            :boolean          default(FALSE)
 #  views_count       :integer          default(0)
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  city_id           :integer
+#  code_language_id  :integer
 #  country_id        :integer
 #  currency_id       :integer
 #  payment_period_id :integer
@@ -24,4 +26,12 @@
 
 class EmployerVacancy < ActiveRecord::Base
   has_rich_text :body
+
+  belongs_to :user
+  belongs_to :city
+  belongs_to :country
+  belongs_to :code_language
+  belongs_to :currency
+  belongs_to :payment_period
+  belongs_to :schedule
 end

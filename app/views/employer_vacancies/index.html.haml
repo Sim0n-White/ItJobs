@@ -2,27 +2,33 @@
   .row.mt-4.mb-4.align-items-center.align-items-lg-baseline
     .col-sm-7
       %h1 Ваши вакансии
+    .col-sm-5
+      .justify-content-lg-end(style='right: 15px; position: absolute; bottom: -10px')
+        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-success' if policy(:employer_vacancy).new?
   .ul.list-group
     - @vacancies.each do |vacancy|
       .li.list-group-item
         .row
           .col-sm-8
             %h4
-              = link_to vacancy.company_name, employer_vacancy_path(vacancy.id) if policy(vacancy).show?
+              = link_to "#{vacancy.company_name}, #{vacancy.position}", employer_vacancy_path(vacancy.id)
           .col-sm-4
-            = vacancy.company_site
-
+            %h6
+              ="от #{vacancy.fork_from} до #{vacancy.fork_to} #{vacancy.currency&.currency_name} #{vacancy.payment_period&.payment_period_name}"
         .row
           .col-sm-8
-            = vacancy.contact_email
+            Компания
+            = link_to vacancy.company_name, vacancy.company_site, target: :_blank
+            = "(#{vacancy.city.city_name}, #{vacancy.country.country_name})"
+            = "создана #{time_ago_in_words(vacancy.created_at, locale: :ru)} назад"
           .col-sm-4
-            = vacancy.contact_person
-            = vacancy.position
-        .row
-          .col-sm-8
-            = vacancy.contact_person
-          .col-sm-4
-            = link_to 'Изменить', edit_employer_vacancy_path(vacancy.id) if policy(vacancy).edit?
+            .mr-2.badge.badge-info
+              = vacancy.schedule&.schedule_name
+            - if vacancy.remote_work?
+              .mr-2.badge.badge-success
+                Удалённая работа
+        .row.float-right
+          = link_to 'Изменить', edit_employer_vacancy_path(vacancy.id) if policy(vacancy).edit?
   .row.mt-3
     .col
       = pagy_bootstrap_nav(@pagy).html_safe
