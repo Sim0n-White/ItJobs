@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[itjobs]
 
   def itjobs
-    @pagy, @vacancies = pagy(EmployerVacancy.where(status: true))
+
+    @vacancies_finder = Search::EmployerVacancyFinder.new(params, session).find
+    @pagy, @vacancies = pagy(@vacancies_finder.where(status: true))
   end
 end

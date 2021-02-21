@@ -6,6 +6,13 @@
       .justify-content-lg-end(style='right: 15px; position: absolute; bottom: -10px')
         = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-success' if policy(:employer_vacancy).new?
         = link_to 'Ваши вакансии', employer_vacancies_path, class: 'btn btn-primary' if policy(:employer_vacancy).index?
+  .row
+    = simple_form_for :filter, url: root_path, method: :get do |f|
+      .form-group
+        .col-sm-7
+          = f.input :country_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @countries,
+                   label_method: :country_name, value_method: :id, include_blank: true
+          = button_tag 'Искать', type: 'submit', class: 'btn btn-default'
 
   .ul.list-group
     - @vacancies.each do |vacancy|

@@ -8,5 +8,8 @@
 #  updated_at   :datetime         not null
 #
 class Country < ActiveRecord::Base
+
+  has_many :employer_vacancies
   has_many :cities
+
 end
