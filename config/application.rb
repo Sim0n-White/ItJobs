@@ -10,7 +10,13 @@ module ItJobs
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.autoloader = :classic
     config.active_record.belongs_to_required_by_default = false
+
+    config.eager_load_paths << Rails.root.join('app', 'services')
+    config.eager_load_paths += %W(#{config.root}/lib)
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
+
 
     # Configuration for the application, engines, and railties goes here.
     #
