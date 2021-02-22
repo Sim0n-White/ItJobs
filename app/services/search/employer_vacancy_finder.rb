@@ -14,6 +14,9 @@ module Search
     def filter_fields
       %i[
         country_id
+        city_id
+        schedule_id
+        code_language_id
       ]
     end
 

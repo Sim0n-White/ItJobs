@@ -5,7 +5,7 @@ module Search
     def initialize(params, session)
       @params = params
       @session = session
-      @params[:filter][:page] = @params[:page]
+      @params[:filter] = {} unless @params[:filter].present?
     end
 
     def self.find(params, session)
@@ -14,7 +14,6 @@ module Search
 
     def find
       @params[:reset_filter] ? reset_filter : fill_filter
-      @params[:filter][:page] = nil if @params[:button]
       collection_by_filter
       self
     end

@@ -19,7 +19,7 @@
           .col-sm-8
             Компания
             = link_to vacancy.company_name, vacancy.company_site, target: :_blank
-            = "(#{vacancy.city.city_name}, #{vacancy.country.country_name})"
+            = "(#{vacancy.city&.city_name}, #{vacancy.country&.country_name})"
             = "создана #{time_ago_in_words(vacancy.created_at, locale: :ru)} назад"
           .col-sm-4
             .mr-2.badge.badge-info

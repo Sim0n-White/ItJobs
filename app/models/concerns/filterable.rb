@@ -4,7 +4,6 @@ module Filterable
   class_methods do
     def filtered_by(params = {}, scope = nil)
       filter_class = "Filters::#{polymorphic_name}Filter"
-
       filter_object = filter_class.constantize.new(scope)
       cleaned_params = params.delete_if { |_, v| v.blank? }
       permitted_params = hash_params(cleaned_params).symbolize_keys.extract!(*filter_object.available_params)
