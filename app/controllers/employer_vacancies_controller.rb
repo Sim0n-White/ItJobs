@@ -1,4 +1,5 @@
 class EmployerVacanciesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[show]
   before_action :load_model, only: %i[show edit update accept reject destroy]
   before_action :load_collections, only: %i[new create edit update]
 
@@ -48,7 +49,6 @@ class EmployerVacanciesController < ApplicationController
   end
 
   def show
-    authorize @employer_vacancy
     @employer_vacancy.update(views_count: @employer_vacancy.views_count + 1)
   end
 
