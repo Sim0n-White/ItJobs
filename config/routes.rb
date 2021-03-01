@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth', registrations: 'registrations' }
   root 'pages#itjobs'
 
   resources :administrations
+  resources :employee_summaries
   resources :employer_vacancies do
     member do
       post :accept

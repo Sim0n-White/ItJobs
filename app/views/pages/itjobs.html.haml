@@ -4,6 +4,7 @@
       %h1 Вакансии для разработчиков
     .col-sm-5
       .justify-content-lg-end(style='right: 15px; position: absolute; bottom: -10px')
+        = link_to 'Разместить резюме', new_employee_summary_path, class: 'btn btn-success' if policy(:employee_summary).new?
         = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-success' if policy(:employer_vacancy).new?
         = link_to 'Ваши вакансии', employer_vacancies_path, class: 'btn btn-primary' if policy(:employer_vacancy).index?
   .row
