@@ -3,9 +3,9 @@ class EmployeeSummariesController < ApplicationController
   before_action :load_collections, only: %i[new create edit update]
 
   def index
-    authorize EmployerVacancy
+    authorize EmployeeSummary
 
-    @pagy, @vacancies = pagy(EmployeeSummary.where(user_id: current_user.id))
+    @pagy, @summaries = pagy(EmployeeSummary.where(user_id: current_user.id))
   end
 
   def new
@@ -82,7 +82,8 @@ class EmployeeSummariesController < ApplicationController
       :skill_level_id,
       :english_skill_id,
       :remote_work,
-      :git_check
+      :git_check,
+      :body
     )
   end
 
@@ -98,6 +99,6 @@ class EmployeeSummariesController < ApplicationController
   end
 
   def load_model
-    @employee_summary = EmployerVacancy.find params[:id]
+    @employee_summary = EmployeeSummary.find params[:id]
   end
 end

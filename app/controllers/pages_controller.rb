@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :load_collections, only: %i[itjobs]
 
   def itjobs
-    if current_user.employer?
+    if current_user&.employer?
       @employee_summaries_finder = Search::EmployerVacancyFinder.new(params, session).find
       @pagy, @vacancies = pagy(xcvgfvxcemployer_vacancies_finder.collection.where(status: true))
     else

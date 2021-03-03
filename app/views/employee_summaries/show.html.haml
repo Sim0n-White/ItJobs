@@ -1,0 +1,29 @@
+.container
+  .row.mt-4
+    .col
+      %h1
+        = link_to 'Главная', root_path
+        = " > #{@employee_summary.first_name} #{@employee_summary.second_name}"
+        = "(#{@employee_summary.position})"
+        = "#{@employee_summary.views_count}👀"
+
+  %hr.mb-4.mt-4(style='color: black')
+
+    .row
+      .col-sm-6
+        %h4
+          .mr-2.badge.badge-info
+            = @employee_summary.schedule&.schedule_name
+          - if @employee_summary.remote_work?
+            .mr-2.badge.badge-success
+              Удалённая работа
+
+  %hr.mb-4.mt-4
+
+  .row
+    .col
+      = "Пользователь предоставил #{link_to 'GitHub', @employee_summary.user.git_home_page}, "
+      = "резюме создано #{time_ago_in_words(@employee_summary.created_at, locale: :ru)} назад"
+  .row
+    .col.mb-4
+      = @employee_summary.body

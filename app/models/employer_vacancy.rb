@@ -28,6 +28,8 @@ class EmployerVacancy < ActiveRecord::Base
   include Filterable
   has_rich_text :body
 
+  validates :company_site, format: URI::regexp(%w[http https])
+
   belongs_to :user
   belongs_to :city
   belongs_to :country

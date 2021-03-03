@@ -30,6 +30,10 @@ class EmployeeSummary < ActiveRecord::Base
   include Filterable
   has_rich_text :body
 
+  validates :first_name, :second_name, :position, :city_id, :code_language_id, :english_skill_id, :country_id,
+            :contact_email, :contact_phone, :fork_from, :fork_to, :currency_id, :schedule_id, :skill_level_id, presence: { message: "Не может быть пустым" }
+
+
   belongs_to :user
   belongs_to :city
   belongs_to :country
