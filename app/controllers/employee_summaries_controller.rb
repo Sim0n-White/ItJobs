@@ -33,7 +33,8 @@ class EmployeeSummariesController < ApplicationController
     authorize @employee_summary
 
     if @employee_summary.update vacancy_params
-      redirect_to employer_vacancies_path, notice: 'Ваканстя успешно изменена!'
+      @employee_summary.update(status: false)
+      redirect_to employee_summaries_path, notice: 'Резюме успешно изменено и ожидает проверки админимтратора'
     else
       render :edit
     end
@@ -53,13 +54,13 @@ class EmployeeSummariesController < ApplicationController
   def accept
     authorize @employee_summary
     @employee_summary.update(status: true)
-    redirect_to administrations_path, notice: 'Вакансия принята!'
+    redirect_to unaccepted_summaries_administrations_path, notice: 'Вакансия принята!'
   end
 
   def reject
     authorize @employee_summary
     @employee_summary.update(status: false)
-    redirect_to administrations_path, notice: 'Вакансия отклонена!'
+    redirect_to unaccepted_summaries_administrations_path, notice: 'Вакансия отклонена!'
   end
 
   private

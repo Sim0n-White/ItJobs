@@ -1,21 +1,27 @@
 class AdministrationsController < ApplicationController
-  before_action :load_model, only: %i[show]
 
-  def index
+  def unaccepted_vacancies
     authorize :administration
 
     @pagy, @vacancies = pagy(EmployerVacancy.where(status: false))
   end
 
-  def show
+  def unaccepted_summaries
     authorize :administration
 
+    @pagy, @summaries = pagy(EmployeeSummary.where(status: false))
   end
 
-  private
+  def show_vacancy
+    authorize :administration
 
-  def load_model
     @employer_vacancy = EmployerVacancy.find params[:id]
+  end
+
+  def show_summary
+    authorize :administration
+
+    @employee_summary = EmployeeSummary.find params[:id]
   end
 
 end

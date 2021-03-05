@@ -2,7 +2,7 @@
   .row.mt-4
     .col
       %h1
-        = link_to 'Главная', root_path
+        = link_to 'Неутвержденные резюме', unaccepted_summaries_administrations_path
         = " > #{@employee_summary.first_name} #{@employee_summary.second_name}"
         = "(#{@employee_summary.position})"
         = "#{@employee_summary.views_count}👀"
@@ -45,10 +45,7 @@
           Главная страница пользователя:
           = link_to 'GitHub', @employee_summary.user.git_home_page
 
-
-
   %hr.mb-4.mt-4
-
 
   .row
     .col.mb-4
@@ -66,3 +63,9 @@
       .col
         Почта:
         = @employee_summary.contact_email
+
+  %hr.mb-4.mt-4
+
+  .row
+    = link_to 'Принять', accept_employee_summary_path(@employee_summary), method: :post, class: 'btn btn-success'
+    = link_to 'Отклонить', reject_employee_summary_path(@employee_summary), method: :post, class: 'btn btn-danger'
