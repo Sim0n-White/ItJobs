@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def itjobs
     if current_user&.employer?
       @employee_summaries_finder = Search::EmployeeSummaryFinder.new(params, session).find
-      @pagy, @vacancies = pagy(@employee_summaries_finder.collection.where(status: true))
+      @pagy, @summaries = pagy(@employee_summaries_finder.collection.where(status: true))
     else
       @employer_vacancies_finder = Search::EmployerVacancyFinder.new(params, session).find
       @pagy, @vacancies = pagy(@employer_vacancies_finder.collection.where(status: true))
