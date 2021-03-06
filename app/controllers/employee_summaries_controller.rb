@@ -19,7 +19,7 @@ class EmployeeSummariesController < ApplicationController
     @employee_summary = EmployeeSummary.new(vacancy_params)
     @employee_summary.user_id = current_user.id
     if @employee_summary.save
-      redirect_to root_path, notice: 'Ваканстя успешно создана!'
+      redirect_to employee_summaries_path, notice: 'Ваканстя успешно создана!'
     else
       render :new
     end
@@ -44,7 +44,7 @@ class EmployeeSummariesController < ApplicationController
     authorize EmployerVacancy
 
     @employee_summary.destroy
-    redirect_to employer_vacancies_path
+    redirect_to employee_summaries_path, notice: 'Резюме успешно удалено'
   end
 
   def show

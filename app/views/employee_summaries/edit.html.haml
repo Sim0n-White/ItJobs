@@ -87,5 +87,10 @@
               .col-3
                 = f.input :git_check, label: "Отобразить данные из GitHub?", as: :boolean
 
-        .form-group
-          = f.button :submit, 'Сохранить', class: 'btn btn-primary'
+          .form-group
+            .row
+              .col-9
+                = f.button :submit, 'Сохранить', class: 'btn btn-primary'
+              .col-3
+                = link_to 'Удалить резюме', employee_summary_path(@employee_summary), method: :delete, class: 'btn btn-danger float-right'
+

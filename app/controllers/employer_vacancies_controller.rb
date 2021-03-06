@@ -35,7 +35,7 @@ class EmployerVacanciesController < ApplicationController
     @employer_vacancy = EmployerVacancy.new(vacancy_params)
     @employer_vacancy.user_id = current_user.id
     if @employer_vacancy.save
-      redirect_to root_path, notice: 'Ваканстя успешно создана!'
+      redirect_to employer_vacancies_path, notice: 'Ваканстя успешно создана!'
     else
       render :new
     end
