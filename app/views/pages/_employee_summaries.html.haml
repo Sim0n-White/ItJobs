@@ -1,0 +1,61 @@
+
+.row.mt-4.mb-4.align-items-center.align-items-lg-baseline
+  .col-sm-7
+    %h1 Резюме
+  .col-sm-5
+    .justify-content-lg-end(style='right: 15px; position: absolute; bottom: -10px')
+      - if user_signed_in?
+        = link_to 'Разместить вакансию', new_employer_vacancy_path, class: 'btn btn-success' if policy(:employer_vacancy).new?
+        = link_to 'Ваши вакансии', employer_vacancies_path, class: 'btn btn-primary' if policy(:employer_vacancy).index?
+.row
+  .col.mb-4
+    = simple_form_for :filter, url: root_path, method: :get do |f|
+      .form-group
+        .row
+          .col-3
+            = f.input :code_language_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @code_languages,
+                       label_method: :code_language_name, value_method: :id, include_blank: '<Язык программирования>', required: false,
+                       selected: params[:filter][:code_language_id]
+          .col-3
+            = f.input :schedule_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @schedules,
+                       label_method: :schedule_name, value_method: :id, include_blank: '<Тип занятости>', required: false,
+                       selected: params[:filter][:schedule_id]
+          .col-3
+            = f.input :country_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @countries,
+                       label_method: :country_name, value_method: :id, include_blank: '<Страна>', required: false,
+                       selected: params[:filter][:country_id]
+          .col-3
+            = f.input :city_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @cities,
+                       label_method: :city_name, value_method: :id, include_blank: '<Город>', required: false,
+                       selected: params[:filter][:city_id]
+      .form-group
+        = button_tag 'Искать', type: 'submit', class: 'btn btn-primary'
+
+
+.ul.list-group
+  - @summaries.each do |summary|
+    .li.list-group-item
+      .row
+        .col-sm-8
+          %h4
+            = link_to summary.position, employee_summary_path(summary.id)
+        .col-sm-4
+          %h6
+            ="от #{summary.fork_from} до #{summary.fork_to} #{summary.currency&.currency_name} #{summary.payment_period&.payment_period_name}"
+      .row
+        .col-sm-8
+          - if summary.user.uid.present? && summary.git_check?
+            = link_to "#{summary.first_name} (GitHub)", summary.user.git_home_page, target: :_blank
+            = "(#{summary.city&.city_name}, #{summary.country&.country_name})"
+            = "создана #{time_ago_in_words(summary.created_at, locale: :ru)} назад"
+        .col-sm-4
+          .mr-2.badge.badge-info
+            = summary.schedule&.schedule_name
+          - if summary.remote_work?
+            .mr-2.badge.badge-success
+              Удалённая работа
+      .row.float-right
+        = link_to 'Изменить', edit_employee_summary_path(summary.id) if policy(summary).edit?
+.row.mt-3
+  .col
+    = pagy_bootstrap_nav(@pagy).html_safe

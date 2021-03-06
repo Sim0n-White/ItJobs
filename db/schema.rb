@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_135822) do
+ActiveRecord::Schema.define(version: 2021_03_01_154502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,31 @@ ActiveRecord::Schema.define(version: 2021_02_20_135822) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "employee_summaries", force: :cascade do |t|
+    t.string "position"
+    t.integer "schedule_id"
+    t.integer "country_id"
+    t.integer "city_id"
+    t.integer "fork_from"
+    t.integer "fork_to"
+    t.integer "currency_id"
+    t.integer "payment_period_id"
+    t.string "contact_email"
+    t.string "contact_phone"
+    t.integer "user_id"
+    t.integer "views_count", default: 0
+    t.boolean "status", default: false
+    t.integer "code_language_id"
+    t.string "first_name"
+    t.string "second_name"
+    t.integer "skill_level_id"
+    t.boolean "english_skill_id", default: false
+    t.boolean "remote_work", default: false
+    t.boolean "git_check", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "employer_vacancies", force: :cascade do |t|
     t.string "position"
     t.integer "schedule_id"
@@ -100,6 +125,12 @@ ActiveRecord::Schema.define(version: 2021_02_20_135822) do
     t.boolean "remote_work", default: false
   end
 
+  create_table "english_skills", force: :cascade do |t|
+    t.string "english_skill_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "payment_periods", force: :cascade do |t|
     t.string "payment_period_name"
     t.datetime "created_at", precision: 6, null: false
@@ -119,6 +150,12 @@ ActiveRecord::Schema.define(version: 2021_02_20_135822) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "skill_levels", force: :cascade do |t|
+    t.string "skill_level_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

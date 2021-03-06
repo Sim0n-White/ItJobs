@@ -1,0 +1,91 @@
+.container
+  .row.mb-4.mt-4
+    .col
+      %h1
+        = link_to 'Главная', root_path
+        > Составить резюме
+  .row
+    .col.mb-4
+      = simple_form_for @employee_summary do |f|
+        .form-group
+          .row
+            .col-4
+              .label *Имя
+              = f.text_field :first_name, class: 'full-width form-controll', autofocus: true
+            .col-4
+              .label *Фамилия
+              = f.text_field :second_name, class: 'full-width'
+            .col-4
+              .label *Позиция
+              = f.text_field :position, class: 'full-width'
+        .form-group
+          .row
+            .col-3
+              .label *Уровень разработки
+              = f.input :skill_level_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @skill_levels,
+                   label_method: :skill_level_name, value_method: :id, include_blank: false
+            .col-3
+              .label *Язык программирования
+              = f.input :code_language_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @code_languages,
+                   label_method: :code_language_name, value_method: :id, include_blank: false
+            .col-3
+              .label *Уровень знания английского
+              = f.input :english_skill_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @english_skills,
+                   label_method: :english_skill_name, value_method: :id, include_blank: false
+            .col-3
+              .label
+                *Тип занятости
+                = f.input :schedule_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @schedules,
+                     label_method: :schedule_name, value_method: :id, include_blank: false
+        .form-group
+          .label *Описание достижений, опыт работы, ссылки на проекты, наличие высшего образования, знание иностранных яхыков и др.
+          = f.rich_text_area :body, label: :body
+        .form-group
+          .row
+            .col-6
+              .label Контактная почта
+              = f.text_field :contact_email, class: 'full-width'
+
+            .col-6
+              .label Контактный телефон
+              = f.text_field :contact_phone, class: 'full-width'
+        .form-group
+          .row
+            .col-3
+              .label *Зарплатная вилка
+            .col-3
+            .col-3
+              .label *Денежная единица
+            .col-3
+              .label *Период
+          .row
+            .col-3
+              = f.input :fork_from, placeholder: 'От', input_html: { style: "width: 100%;" }, class: 'full-width', label: false
+            .col-3
+              = f.input :fork_to, placeholder: 'До', input_html: { style: "width: 100%;" }, label: false
+            .col-3
+              = f.input :currency_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @currencies,
+                   label_method: :currency_name, value_method: :id, include_blank: false
+            .col-3
+              = f.input :payment_period_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @period,
+                   label_method: :payment_period_name, value_method: :id, include_blank: false
+        .form-group
+          .row
+            .col-3
+              .label *Страна
+              = f.input :country_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @countries,
+                   label_method: :country_name, value_method: :id, include_blank: false
+            .col-3
+              .label *Город
+              = f.input :city_id, input_html: { class: "select2-fullwidth" }, label: false, collection: @cities,
+                   label_method: :city_name, value_method: :id, include_blank: false
+        .form-group
+          .row
+            .col-3
+              = f.input :remote_work, label: "Возможна удалённая работа", as: :boolean
+            - if current_user.uid.present?
+              .col-3
+                = f.input :git_check, label: "Отобразить данные из GitHub?", as: :boolean
+
+        .form-group
+          = f.button :submit, 'Сохранить', class: 'btn btn-primary'

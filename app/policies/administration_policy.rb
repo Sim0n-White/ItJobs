@@ -1,10 +1,18 @@
 class AdministrationPolicy < ::ApplicationPolicy
 
-  def index?
+  def unaccepted_vacancies?
     admin?
   end
 
-  def show?
+  def unaccepted_summaries?
+    admin?
+  end
+
+  def show_vacancy?
+    admin?
+  end
+
+  def show_summary?
     admin?
   end
 

@@ -4,7 +4,7 @@
 @import "bootstrap";
 
 .container {
-  padding-bottom: 10px;
+  padding-bottom: 2%;
 }
 
 .full-width{
@@ -25,6 +25,11 @@ li {
   width: 1800px;
   max-width: 1800px;
   margin: 0 auto;
+}
+
+.salary_information {
+  float: right;
+  text-align: right;
 }
 
 .botnav a {

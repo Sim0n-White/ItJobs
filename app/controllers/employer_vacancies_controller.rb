@@ -55,13 +55,13 @@ class EmployerVacanciesController < ApplicationController
   def accept
     authorize @employer_vacancy
     @employer_vacancy.update(status: true)
-    redirect_to administrations_path, notice: 'Вакансия принята!'
+    redirect_to unaccepted_vacancies_administrations_path, notice: 'Вакансия принята!'
   end
 
   def reject
     authorize @employer_vacancy
     @employer_vacancy.update(status: false)
-    redirect_to administrations_path, notice: 'Вакансия отклонена!'
+    redirect_to unaccepted_vacancies_administrations_path, notice: 'Вакансия отклонена!'
   end
 
   private

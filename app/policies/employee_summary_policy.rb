@@ -1,11 +1,11 @@
-class EmployerVacancyPolicy < ::ApplicationPolicy
+class EmployeeSummaryPolicy < ::ApplicationPolicy
 
   def index?
-    admin? || user&.employer?
+    admin? || !user&.employer?
   end
 
   def create?
-    admin? || user&.employer?
+    admin? || !user&.employer?
   end
 
   def new?
@@ -13,11 +13,11 @@ class EmployerVacancyPolicy < ::ApplicationPolicy
   end
 
   def show?
-    admin? || (user&.employer? && user_is_owner?)
+    admin? || (!user&.employer? && user_is_owner?)
   end
 
   def update?
-    admin? || (user&.employer? && user_is_owner?)
+    admin? || (!user&.employer? && user_is_owner?)
   end
 
   def edit?
@@ -33,7 +33,7 @@ class EmployerVacancyPolicy < ::ApplicationPolicy
   end
 
   def destroy?
-    admin? || (user&.employer? && user_is_owner?)
+    admin? || (!user&.employer? && user_is_owner?)
   end
 
   private

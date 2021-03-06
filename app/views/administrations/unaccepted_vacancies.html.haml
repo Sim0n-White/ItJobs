@@ -21,8 +21,8 @@
         .row
           .col-sm-8
             = vacancy.contact_person
-          .col-sm-4
-            = link_to 'Просмотреть', administration_path(vacancy.id) if policy(vacancy).show?
+          .col-sm-4.salary_information
+            = link_to 'Просмотреть', show_vacancy_administration_path(vacancy.id) if policy(vacancy).show?
   .row.mt-3
     .col
       = pagy_bootstrap_nav(@pagy).html_safe

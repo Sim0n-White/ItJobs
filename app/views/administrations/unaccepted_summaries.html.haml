@@ -1,0 +1,32 @@
+.container
+  .row.mt-4.mb-4.align-items-center.align-items-lg-baseline
+    .col-sm-7
+      %h1 Неутвержденные Резюме
+  .ul.list-group
+    - @summaries.each do |summary|
+      .li.list-group-item
+        .row
+          .col-sm-8
+            %h4
+              = link_to summary.position, employee_summary_path(summary.id)
+          .col-sm-4
+            %h6
+              ="от #{summary.fork_from} до #{summary.fork_to} #{summary.currency&.currency_name} #{summary.payment_period&.payment_period_name}"
+        .row
+          .col-sm-8
+            - if summary.user.uid.present? && summary.git_check?
+              = link_to "#{summary.first_name} (GitHub)", summary.user.git_home_page, target: :_blank
+              = "(#{summary.city&.city_name}, #{summary.country&.country_name})"
+              = "создана #{time_ago_in_words(summary.created_at, locale: :ru)} назад"
+          .col-sm-4
+            .mr-2.badge.badge-info
+              = summary.schedule&.schedule_name
+            - if summary.remote_work?
+              .mr-2.badge.badge-success
+                Удалённая работа
+        .row
+          .col.salary_information
+            = link_to 'Просмотреть', show_summary_administration_path(summary.id) if policy(summary).show?
+  .row.mt-3
+    .col
+      = pagy_bootstrap_nav(@pagy).html_safe
