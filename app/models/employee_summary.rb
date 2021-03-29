@@ -1,10 +1,14 @@
 # == Schema Information
 #
-# Table name: employee_summaries
+# Table name: announcements
 #
 #  id                :bigint           not null, primary key
+#  company_name      :string
+#  company_site      :string
 #  contact_email     :string
+#  contact_person    :string
 #  contact_phone     :string
+#  document_type     :string
 #  first_name        :string
 #  fork_from         :integer
 #  fork_to           :integer
@@ -26,7 +30,7 @@
 #  skill_level_id    :integer
 #  user_id           :integer
 #
-class EmployeeSummary < ActiveRecord::Base
+class EmployeeSummary < Announcement
   include Filterable
   has_rich_text :body
 
