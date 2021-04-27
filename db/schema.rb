@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_154502) do
+ActiveRecord::Schema.define(version: 2021_03_29_124754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,35 @@ ActiveRecord::Schema.define(version: 2021_03_01_154502) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "announcements", force: :cascade do |t|
+    t.string "position"
+    t.integer "schedule_id"
+    t.integer "country_id"
+    t.integer "city_id"
+    t.integer "fork_from"
+    t.integer "fork_to"
+    t.integer "currency_id"
+    t.integer "payment_period_id"
+    t.string "contact_email"
+    t.string "contact_phone"
+    t.integer "user_id"
+    t.integer "views_count", default: 0
+    t.boolean "status", default: false
+    t.integer "code_language_id"
+    t.string "first_name"
+    t.string "second_name"
+    t.integer "skill_level_id"
+    t.boolean "english_skill_id", default: false
+    t.boolean "remote_work", default: false
+    t.boolean "git_check", default: false
+    t.string "contact_person"
+    t.string "company_name"
+    t.string "company_site"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "document_type"
+  end
+
   create_table "cities", force: :cascade do |t|
     t.string "city_name"
     t.integer "country_id"
@@ -76,53 +105,6 @@ ActiveRecord::Schema.define(version: 2021_03_01_154502) do
     t.string "currency_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "employee_summaries", force: :cascade do |t|
-    t.string "position"
-    t.integer "schedule_id"
-    t.integer "country_id"
-    t.integer "city_id"
-    t.integer "fork_from"
-    t.integer "fork_to"
-    t.integer "currency_id"
-    t.integer "payment_period_id"
-    t.string "contact_email"
-    t.string "contact_phone"
-    t.integer "user_id"
-    t.integer "views_count", default: 0
-    t.boolean "status", default: false
-    t.integer "code_language_id"
-    t.string "first_name"
-    t.string "second_name"
-    t.integer "skill_level_id"
-    t.boolean "english_skill_id", default: false
-    t.boolean "remote_work", default: false
-    t.boolean "git_check", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "employer_vacancies", force: :cascade do |t|
-    t.string "position"
-    t.integer "schedule_id"
-    t.integer "country_id"
-    t.integer "city_id"
-    t.integer "fork_from"
-    t.integer "fork_to"
-    t.integer "currency_id"
-    t.integer "payment_period_id"
-    t.string "contact_email"
-    t.string "contact_person"
-    t.string "company_name"
-    t.string "company_site"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
-    t.integer "views_count", default: 0
-    t.boolean "status", default: false
-    t.integer "code_language_id"
-    t.boolean "remote_work", default: false
   end
 
   create_table "english_skills", force: :cascade do |t|

@@ -8,7 +8,7 @@ module Search
     protected
 
     def collection_by_filter
-      @collection = EmployerVacancy.filtered_by(@params[:filter])
+      @collection = EmployerVacancy.filtered_by(@params[:filter], nil, 'EmployerVacancy')
     end
 
     def filter_fields

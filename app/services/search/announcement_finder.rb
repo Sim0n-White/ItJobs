@@ -1,5 +1,5 @@
 module Search
-  class EmployeeSummaryFinder < Finder
+  class AnnouncementFinder < Finder
 
     def initialize(params, session)
       super(params, session)
@@ -8,7 +8,7 @@ module Search
     protected
 
     def collection_by_filter
-      @collection = EmployeeSummary.filtered_by(@params[:filter], nil, 'EmployerVacancy')
+      @collection = EmployeeSummary.filtered_by(@params[:filter])
     end
 
     def filter_fields
