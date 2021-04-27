@@ -31,5 +31,7 @@
 #  user_id           :integer
 #
 class Announcement < ActiveRecord::Base
+  self.inheritance_column = :document_type
 
+  TYPES = %w[EmployeeSummary EmployerVacancy].freeze
 end
