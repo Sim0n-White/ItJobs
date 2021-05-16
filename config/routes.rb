@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'omniauth', registrations: 'registrations' }
   root 'pages#itjobs'
 
+  resources :posts, :path => 'blogs' do
+    resources :comments
+  end
+
+  resources :loader, :path => 'loaderio-683036b8dfe4eb55bc6ab0298ca7c63f' do
+  end
+
+
   resources :administrations do
     collection do
       get :unaccepted_vacancies
